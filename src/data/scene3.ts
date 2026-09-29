@@ -1,4 +1,5 @@
-import { applyLayout } from './layouts';
+import { applyLayout } from './layouts'
+import { type Page } from '../store/store'
 
 // ─── Вариант A: trust_ren (приняли тепло) ───
 
@@ -146,6 +147,23 @@ const s3c_p2 = applyLayout('8', 'act1_scene3c_p2', [
   },
 ]);
 
+// ─── Ужин (общая страница для всех вариантов) ───
+
+const dinnerPage: Page = {
+  id: 'act1_scene3_dinner',
+  gridTemplateColumns: '1fr',
+  gridTemplateRows: '1fr',
+  gridAreas: [{ panelId: 'p_dinner', area: '1 / 1 / 2 / 2', order: 1 }],
+  panels: [{
+    id: 'p_dinner',
+    src: '/comics/act_1/panels/s3_dinner.png', type: 'image' as const,
+    alt: 'Ужин всей труппой, Кагэ в углу',
+    dialogue: [
+      { speakerId: 'narrator', text: 'Ужин прошёл в молчании. Но молчание это было тяжёлым — каждый думал о своём. И каждый чувствовал: что-то изменилось.' },
+    ],
+  }],
+}
+
 // ─── Экспорт ───
 
 export interface Scene3Variant {
@@ -160,7 +178,7 @@ export interface Scene3Variant {
 export const scene3Variants: Record<string, Scene3Variant> = {
   trust: {
     id: 'scene3_trust',
-    pages: [s3a_p1, s3a_p2],
+    pages: [s3a_p1, s3a_p2, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
@@ -172,7 +190,7 @@ export const scene3Variants: Record<string, Scene3Variant> = {
   },
   test: {
     id: 'scene3_test',
-    pages: [s3b_p1, s3b_p2],
+    pages: [s3b_p1, s3b_p2, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
@@ -184,7 +202,7 @@ export const scene3Variants: Record<string, Scene3Variant> = {
   },
   reject: {
     id: 'scene3_reject',
-    pages: [s3c_p1, s3c_p2],
+    pages: [s3c_p1, s3c_p2, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
