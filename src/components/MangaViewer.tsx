@@ -1,5 +1,6 @@
 import { useStore, Page } from '../store/store'
 import { useEffect, useRef, useState } from 'react'
+import { assetPath } from '../lib/paths'
 
 const speakerNames: Record<string, string> = {
   tadashi: 'ТАДАСИ', ryusei: 'РЮСЭЙ', goro: 'ГОРО',
@@ -80,11 +81,11 @@ export default function MangaViewer({ page, onPageComplete }: Props) {
             style={{ gridArea: area?.area, ...animStyle }}
           >
             {panel.type === 'video' ? (
-              <video src={panel.src} autoPlay muted playsInline preload="auto"
+              <video src={assetPath(panel.src)} autoPlay muted playsInline preload="auto"
                 draggable={false} onContextMenu={e => e.preventDefault()}
                 style={{ objectPosition: `${focus.x}% ${focus.y}%`, width: '100%', height: '100%', objectFit: 'cover', userSelect: 'none', WebkitUserSelect: 'none' }} />
             ) : (
-              <img src={panel.src} alt={panel.alt}
+              <img src={assetPath(panel.src)} alt={panel.alt}
                 draggable={false} onContextMenu={e => e.preventDefault()}
                 style={{ objectPosition: `${focus.x}% ${focus.y}%`, width: '100%', height: '100%', objectFit: 'cover', userSelect: 'none', WebkitUserSelect: 'none' }} />
             )}

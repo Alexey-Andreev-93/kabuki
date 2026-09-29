@@ -7,6 +7,7 @@ import AudioProvider from './components/AudioProvider'
 import { getRoutes, scaleMap } from './engine/routes'
 import type { RouteEntry } from './engine/types'
 import { useStore, type HistoryEntry } from './store/store'
+import { assetPath } from './lib/paths'
 import './index.css'
 
 export default function App() {
@@ -215,7 +216,7 @@ export default function App() {
         <div style={{ position: 'relative' }}>
           {showChoice && choiceOverlay?.image ? (
             <div style={{ position: 'fixed', inset: 0, background: '#0a0a0a' }}>
-              <img src={choiceOverlay.image} alt="" style={{
+              <img src={assetPath(choiceOverlay.image)} alt="" style={{
                 width: '100vw', height: '100vh', objectFit: 'cover', display: 'block',
               }} />
             </div>
