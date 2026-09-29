@@ -69,7 +69,9 @@ export function getRoutes(): Record<string, RouteEntry> {
     bridge_yuki:  { node: { type: 'bridge', id: 'bridge_yuki', pages: bridgePages.yuki_bond }, onComplete: 'scene4' },
 
     scene4: { node: { type: 'scene', id: 'scene4', pages: getScene4Pages() }, onComplete: 'finale' },
-    finale: { node: { type: 'scene', id: 'finale', pages: finalePages, choice: finaleChoice } },
+    finale: { node: { type: 'scene', id: 'finale', pages: finalePages, choice: finaleChoice }, onChoice: { continue: 'act2_title' } },
+
+    act2_title: { node: { type: 'title_card', jp: '第二幕', ru: 'АКТ ВТОРОЙ', sub: 'Ха — Прорыв' }, onComplete: 'start' },
   }
 }
 

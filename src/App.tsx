@@ -156,6 +156,7 @@ export default function App() {
   const handleBack = useCallback(() => {
     const prev = popHistory()
     if (prev === null) return
+    setBgmKey(k => k + 1)
     setVisible(false)
     setTimeout(() => {
       setNodeId(prev.nodeId)
@@ -222,7 +223,7 @@ export default function App() {
             </div>
           ) : currentPage ? (
             <div className={`page-wrap ${visible ? 'page-visible' : 'page-hidden'}`}>
-              <MangaViewer page={currentPage} onPageComplete={handlePageComplete} />
+              <MangaViewer page={currentPage} sceneClass={nodeId.replace(/_.*$/, '')} onPageComplete={handlePageComplete} />
             </div>
           ) : showChoice ? null : (
             <div style={{ color: '#fff', padding: 40 }}>Загрузка…</div>

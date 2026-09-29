@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useAudio } from './AudioProvider'
+import { assetPath } from '../lib/paths'
 
 const bgmMap: Record<string, string> = {
   title: '/audio/title.mp3',
@@ -14,8 +15,8 @@ export default function SceneAudioPlayer({ sceneId, playKey }: { sceneId: string
   const { playBgm, stopBgm } = useAudio()
 
   useEffect(() => {
-    const src = bgmMap[sceneId]
-    if (src) playBgm(src)
+    const raw = bgmMap[sceneId]
+    if (raw) playBgm(assetPath(raw))
     else stopBgm()
   }, [sceneId, playKey, playBgm, stopBgm])
 

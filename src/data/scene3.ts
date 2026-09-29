@@ -37,7 +37,7 @@ const s3a_p1 = applyLayout('8', 'act1_scene3a_p1', [
 const s3a_p2 = applyLayout('8', 'act1_scene3a_p2', [
   {
     src: '/comics/act_1/panels/s3_a_2_1.png',
-    type: 'video' as const,
+    type: 'image' as const,
     alt: 'Рэн на сцене, монолог мстителя',
     dialogue: [
       {
@@ -157,7 +157,7 @@ const s3b_p1 = applyLayout('8', 'act1_scene3b_p1', [
 const s3b_p2 = applyLayout('9', 'act1_scene3b_p2', [
   {
     src: '/comics/act_1/panels/s3_b_2_1.png',
-    type: 'video' as const,
+    type: 'image' as const,
     alt: 'Рэн в монологе',
     dialogue: [
       {
@@ -235,7 +235,7 @@ const s3c_p1 = applyLayout('8', 'act1_scene3c_p1', [
 const s3c_p2 = applyLayout('8', 'act1_scene3c_p2', [
   {
     src: '/comics/act_1/panels/s3_c_2_1.png',
-    type: 'video' as const,
+    type: 'image' as const,
     alt: 'Рэн шепчет монолог в углу',
     dialogue: [
       {
