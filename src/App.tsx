@@ -178,6 +178,13 @@ export default function App() {
     <AudioProvider>
       <SceneAudioPlayer sceneId={sceneId} playKey={bgmKey} />
 
+      {/* Landscape hint for mobile */}
+      <div className="landscape-hint">
+        <div style={{ fontSize: 'clamp(32px, 10vw, 64px)' }}>📱↻</div>
+        <div>Пожалуйста, поверните устройство</div>
+        <div style={{ color: '#666', fontSize: 'clamp(12px, 3vw, 16px)' }}>Для просмотра комикса используйте горизонтальную ориентацию</div>
+      </div>
+
       {node.type === 'start' ? (
         <div
           style={{
