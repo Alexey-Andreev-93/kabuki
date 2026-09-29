@@ -1,7 +1,7 @@
-// Корректный путь к ассетам с учётом BASE_URL
+// Корректный путь к ассетам с учётом BASE_URL (задан в vite.config.ts)
 export function assetPath(src: string): string {
   if (src.startsWith('/')) {
-    const base = (window as any).__vite_asset_base__ || '/'
+    const base = import.meta.env.BASE_URL || '/'
     const prefix = base.endsWith('/') ? base : base + '/'
     return prefix + src.slice(1)
   }
