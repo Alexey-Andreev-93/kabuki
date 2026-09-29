@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.hermes/
+prompts_*.md
+kabuki_backup_*/
+*.tmp
+.DS_Store
