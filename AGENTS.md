@@ -135,11 +135,9 @@ BGM переключается автоматически по префиксу 
 
 ```bash
 npm run dev         # dev → localhost:5173
-npx vite build      # production build
-git push origin gh-pages -f  # деплой (из dist/)
+npx vite build      # build → docs/
+git add -A && git commit -m "deploy" && git push  # → автоматический деплой на Pages
 ```
-
-Альтернативный деплой: собрать dist/ в /tmp и запушить как ветку gh-pages.
 
 ## 9. Важные правила
 
