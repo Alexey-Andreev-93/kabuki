@@ -51,7 +51,46 @@ const s3a_p2 = applyLayout('8', 'act1_scene3a_p2', [
   },
 ]);
 
+// Концовка A — fullscreen
+const s3a_end: Page = {
+  id: 'act1_scene3a_end',
+  gridTemplateColumns: '1fr', gridTemplateRows: '1fr',
+  gridAreas: [{ panelId: 'p_end', area: '1 / 1 / 2 / 2', order: 1 }],
+  panels: [{
+    id: 'p_end', src: '/comics/act_1/panels/s3_a_end.png', type: 'image' as const,
+    alt: 'Тадаси объявляет: «Все свободны»',
+    dialogue: [
+      { speakerId: 'tadashi', text: 'На сегодня хватит. Все свободны. Репетиция завтра поутру.' },
+      { speakerId: 'narrator', text: 'Репетиция кончилась. Но напряжение не ушло — оно осело в воздухе тонкой пылью.' },
+    ],
+  }],
+};
+
 // ─── Вариант B: test_ren (испытание) ───
+
+const s3b_fight = applyLayout('8', 'act1_scene3b_fight', [
+  {
+    src: '/comics/act_1/panels/s3_b_fight_1.png', type: 'image' as const,
+    alt: 'Рэн и Рюсэй скрестили мечи',
+    dialogue: [
+      { speakerId: 'tadashi', text: 'Хватит болтать. Рюсэй, проверь его. Посмотрим, что за актёр без маски.' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_b_fight_2.png', type: 'image' as const,
+    alt: 'Глаза Рюсэя',
+    dialogue: [
+      { speakerId: 'ryusei', text: 'Держи клинок правильно. Или ты только словами боец?' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_b_fight_3.png', type: 'image' as const,
+    alt: 'Тадаси наблюдает',
+    dialogue: [
+      { speakerId: 'narrator', text: 'Мечи скрестились. В зале стало тихо. Рэн держался — но в глазах Рюсэя мелькнуло что-то, похожее на узнавание.' },
+    ],
+  },
+]);
 
 const s3b_p1 = applyLayout('8', 'act1_scene3b_p1', [
   {
@@ -101,6 +140,20 @@ const s3b_p2 = applyLayout('9', 'act1_scene3b_p2', [
   },
 ]);
 
+// Концовка B — fullscreen
+const s3b_end: Page = {
+  id: 'act1_scene3b_end',
+  gridTemplateColumns: '1fr', gridTemplateRows: '1fr',
+  gridAreas: [{ panelId: 'p_end', area: '1 / 1 / 2 / 2', order: 1 }],
+  panels: [{
+    id: 'p_end', src: '/comics/act_1/panels/s3_b_end.png', type: 'image' as const,
+    alt: 'Тадаси говорит: «Неплохо для первого раза»',
+    dialogue: [
+      { speakerId: 'tadashi', text: 'Неплохо для первого раза. Завтра продолжим. Свободны.' },
+    ],
+  }],
+};
+
 // ─── Вариант C: reject_ren (отказали) ───
 
 const s3c_p1 = applyLayout('8', 'act1_scene3c_p1', [
@@ -147,12 +200,24 @@ const s3c_p2 = applyLayout('8', 'act1_scene3c_p2', [
   },
 ]);
 
-// ─── Ужин (общая страница для всех вариантов) ───
+// Концовка C — fullscreen
+const s3c_end: Page = {
+  id: 'act1_scene3c_end',
+  gridTemplateColumns: '1fr', gridTemplateRows: '1fr',
+  gridAreas: [{ panelId: 'p_end', area: '1 / 1 / 2 / 2', order: 1 }],
+  panels: [{
+    id: 'p_end', src: '/comics/act_1/panels/s3_c_end.png', type: 'image' as const,
+    alt: 'Тадаси уходит; Рэн и Юки остаются в зале',
+    dialogue: [
+      { speakerId: 'tadashi', text: 'Оставайтесь. Но на сцену — ни шагу. Смотрите и учитесь.' },
+    ],
+  }],
+};
 
+// ─── Ужин (общая страница для всех вариантов) ───
 const dinnerPage: Page = {
   id: 'act1_scene3_dinner',
-  gridTemplateColumns: '1fr',
-  gridTemplateRows: '1fr',
+  gridTemplateColumns: '1fr', gridTemplateRows: '1fr',
   gridAreas: [{ panelId: 'p_dinner', area: '1 / 1 / 2 / 2', order: 1 }],
   panels: [{
     id: 'p_dinner',
@@ -162,7 +227,7 @@ const dinnerPage: Page = {
       { speakerId: 'narrator', text: 'Ужин прошёл в молчании. Но молчание это было тяжёлым — каждый думал о своём. И каждый чувствовал: что-то изменилось.' },
     ],
   }],
-}
+};
 
 // ─── Экспорт ───
 
@@ -178,7 +243,7 @@ export interface Scene3Variant {
 export const scene3Variants: Record<string, Scene3Variant> = {
   trust: {
     id: 'scene3_trust',
-    pages: [s3a_p1, s3a_p2, dinnerPage],
+    pages: [s3a_p1, s3a_p2, s3a_end, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
@@ -190,7 +255,7 @@ export const scene3Variants: Record<string, Scene3Variant> = {
   },
   test: {
     id: 'scene3_test',
-    pages: [s3b_p1, s3b_p2, dinnerPage],
+    pages: [s3b_fight, s3b_p1, s3b_p2, s3b_end, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
@@ -202,7 +267,7 @@ export const scene3Variants: Record<string, Scene3Variant> = {
   },
   reject: {
     id: 'scene3_reject',
-    pages: [s3c_p1, s3c_p2, dinnerPage],
+    pages: [s3c_p1, s3c_p2, s3c_end, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
