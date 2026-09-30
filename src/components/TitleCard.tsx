@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 interface TitleCardProps {
   jp: string    // 序幕
   ru: string    // Пролог
@@ -6,6 +8,14 @@ interface TitleCardProps {
 }
 
 export default function TitleCard({ jp, ru, sub, onNext }: TitleCardProps) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); onNext() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onNext])
+
   return (
     <div
       style={{

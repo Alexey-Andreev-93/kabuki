@@ -221,7 +221,8 @@ export default function App() {
                 width: '100vw', height: '100vh', objectFit: 'cover', display: 'block',
               }} />
             </div>
-          ) : currentPage ? (
+          ) : null}
+          {currentPage ? (
             <div className={`page-wrap ${visible ? 'page-visible' : 'page-hidden'}`}>
               <MangaViewer page={currentPage} sceneClass={nodeId.replace(/_.*$/, '')} onPageComplete={handlePageComplete} />
             </div>
@@ -257,6 +258,35 @@ export default function App() {
           )}
         </div>
       )}
+      {/* Act I progress bar */}
+      {node.type !== 'start' && (() => {
+        const beats = [
+          { key: 'prologue', label: 'Пролог' },
+          { key: 'scene0', label: 'Утро' },
+          { key: 'scene15', label: 'Рынок' },
+          { key: 'scene1', label: 'Хлопоты' },
+          { key: 'scene2', label: 'Гости' },
+          { key: 'scene25', label: 'Ночь' },
+          { key: 'scene27', label: 'Вердикт' },
+          { key: 'scene3', label: 'Репетиция' },
+          { key: 'bridge', label: 'Мостик' },
+          { key: 'scene4', label: 'Сад' },
+          { key: 'finale', label: 'Финал' },
+        ]
+        const idx = beats.findIndex(b => nodeId === b.key || nodeId.startsWith(b.key + '_'))
+        const pct = idx >= 0 ? ((idx + 1) / beats.length) * 100 : 0
+        return (
+          <div style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0, height: 3, zIndex: 100,
+            background: 'rgba(255,255,255,0.08)',
+          }}>
+            <div style={{
+              height: '100%', width: `${pct}%`,
+              background: '#cc0000', transition: 'width 0.5s ease',
+            }} />
+          </div>
+        )
+      })()}
     </AudioProvider>
   )
 }

@@ -1,5 +1,5 @@
-import { useStore, Page } from '../store/store'
 import { useEffect, useRef, useState } from 'react'
+import { useStore, Page } from '../store/store'
 import { assetPath } from '../lib/paths'
 
 const speakerNames: Record<string, string> = {
@@ -63,6 +63,19 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
     if (!cleaned) { setCleaned(true); return }
     onPageComplete()
   }
+  // Keep ref for keyboard handler — always holds latest handleClick
+  const handleClickRef = useRef<() => void>(() => {})
+  handleClickRef.current = handleClick
+
+  // Keyboard nav
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && cleaned) { setCleaned(false); return }
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); handleClickRef.current() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [cleaned])
 
   const gridStyle: React.CSSProperties = {
     gridTemplateColumns: page.gridTemplateColumns,
@@ -118,6 +131,7 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
           </div>
         )
       })}
+      {currentPanelOrder >= sortedAreas.length - 1 && !cleaned && <div className="page-corner" />}
       <div className="page-counter">{currentPanelOrder + 1}/{sortedAreas.length}</div>
     </div>
   )

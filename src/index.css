@@ -183,6 +183,23 @@ html, body, #root {
   z-index: 50;
 }
 
+/* Page corner — dog-ear fold */
+.page-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, transparent 50%, #d0c8b8 50%);
+  z-index: 10;
+  pointer-events: none;
+  animation: corner-pulse 2.5s ease-in-out infinite;
+}
+@keyframes corner-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
 /* Page fade */
 .page-wrap.page-hidden {
   opacity: 0;
