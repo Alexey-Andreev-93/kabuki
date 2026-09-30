@@ -21,14 +21,6 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
   const currentDialogue = currentPanel?.dialogue[currentDialogueIndex]
 
   const animated = !!sceneClass
-  const skewAmt = (area: string | undefined) => {
-    if (!animated || !area) return ''
-    // Если панель растянута на несколько рядов (row-end - row-start > 1)
-    // — уменьшаем skew, чтобы не залезать на соседние
-    const parts = area.split('/').map(s => parseInt(s.trim()))
-    if (parts.length === 4 && parts[2] - parts[1] > 1) return ' skewX(1deg)'
-    return ' skewX(3deg)'
-  }
   const [sliding, setSliding] = useState<Set<string>>(new Set())
   const prevPageId = useRef(page.id)
 
@@ -49,8 +41,6 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
     if (!currentPanel) return
     if (currentDialogueIndex + 1 < currentPanel.dialogue.length) { nextDialogue(); return }
     if (currentPanelOrder + 1 < sortedAreas.length) {
-      // Set sliding synchronously BEFORE advancePanel so the new panel
-      // renders with the transition already applied
       if (animated) {
         const nextId = sortedAreas[currentPanelOrder + 1]?.panelId
         if (nextId) {
@@ -76,7 +66,7 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
   }
 
   return (
-    <div className={`manga-page${sceneClass ? ' scene-' + sceneClass : ''}${animated ? ' scene-animated' : ''}`} style={gridStyle} onClick={handleClick}>
+    <div className={`manga-page${sceneClass ? ' scene-' + sceneClass : ''}`} style={gridStyle} onClick={handleClick}>
       {page.panels.map(panel => {
         const area = page.gridAreas.find(a => a.panelId === panel.id)
         const order = sortedAreas.findIndex(a => a.panelId === panel.id)
@@ -89,16 +79,15 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
         let panelStyle: React.CSSProperties = { gridArea: area?.area }
 
         if (animated) {
-          const s = skewAmt(area?.area)
           if (!isRevealed) {
-            panelStyle = { ...panelStyle, opacity: 0, transform: `scale(0.92) translateY(20px)${s}`, pointerEvents: 'none' }
+            panelStyle = { ...panelStyle, opacity: 0, transform: 'scale(0.92) translateY(20px)', pointerEvents: 'none' }
           } else if (sliding.has(panel.id)) {
             panelStyle = {
-              ...panelStyle, opacity: 1, transform: `scale(1) translateY(0)${s}`,
+              ...panelStyle, opacity: 1, transform: 'scale(1) translateY(0)',
               transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
             }
           } else {
-            panelStyle = { ...panelStyle, opacity: 1, transform: `scale(1) translateY(0)${s}` }
+            panelStyle = { ...panelStyle, opacity: 1, transform: 'scale(1) translateY(0)' }
           }
         } else {
           panelStyle = { ...panelStyle, opacity: isRevealed ? 1 : 0, pointerEvents: isRevealed ? 'auto' : 'none' }

@@ -47,6 +47,7 @@ const s1p2_panels = [
     src: '/comics/act_1/panels/panel_2_3.png', type: 'image' as const,
     alt: 'Кагэ на крыше',
     dialogue: [
+      { speakerId: 'narrator', text: 'Кагэ сидел на крыше. Неподвижно. С луком в руке. Снизу его почти не было видно — только силуэт на фоне неба.' },
       { speakerId: 'kage', text: '…' },
     ],
   },
@@ -57,7 +58,7 @@ const s1p3_panels = [
     src: '/comics/act_1/panels/panel_2_4.png', type: 'image' as const,
     alt: 'Пауза — все замолкают',
     dialogue: [
-      { speakerId: 'tadashi', text: 'Раньше… у нас была другая работа. Мечи, заказы, кровь. Тьма. Ладно. Не поминайте лихом. Вернёмся к делу.' },
+      { speakerId: 'tadashi', text: 'Раньше… Прошло. Вернёмся к делу.' },
       { speakerId: 'ryusei', text: '…' },
     ],
   },

@@ -44,17 +44,6 @@ html, body, #root {
   background: #e8e0d8;
 }
 
-.manga-page.scene-animated {
-  overflow: hidden;
-}
-
-.manga-page.scene-animated .panel img,
-.manga-page.scene-animated .panel video {
-  transform: skewX(-3deg);
-  width: 101%;
-  height: 101%;
-}
-
 .panel {
   position: relative;
   overflow: hidden;

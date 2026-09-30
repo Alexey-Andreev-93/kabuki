@@ -1,6 +1,41 @@
 import { type Page } from '../store/store';
 import { applyLayout } from './layouts';
 
+// ─── Страница 1.5: Выход на сцену (перед монологом) ───
+const s3a_before_stage = applyLayout('8', 'act1_scene3a_before_stage', [
+  {
+    src: '/comics/act_1/panels/s3_a_before_1.png',
+    type: 'image' as const,
+    alt: 'Рэн за кулисами, смотрит на сцену из темноты',
+    focus: { x: 50, y: 30 },
+    dialogue: [
+      { speakerId: 'narrator', text: 'Рэн стоял за кулисами и смотрел на сцену. Впервые — не из зала, а из темноты. Изнутри.' },
+      { speakerId: 'ren', text: '…Дышится иначе.' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_a_before_2.png',
+    type: 'image' as const,
+    alt: 'Юки кладёт руку Рэну на плечо',
+    focus: { x: 50, y: 40 },
+    dialogue: [
+      { speakerId: 'yuki', text: 'Ты справишься.' },
+      { speakerId: 'ren', text: 'Я знаю. Но страшно не играть. Страшно, что они увидят.' },
+      { speakerId: 'yuki', text: 'Увидят — что?' },
+      { speakerId: 'ren', text: 'Что я не актёр.' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_a_before_3.png',
+    type: 'image' as const,
+    alt: 'Рэн выходит на сцену со спины — контражур от рампы',
+    focus: { x: 50, y: 50 },
+    dialogue: [
+      { speakerId: 'narrator', text: 'Он шагнул на доску ханамити. Где-то в зале кашлянули. И — тишина. Потому что на сцене стоял не просто человек. А тот, кто помнил.' },
+    ],
+  },
+])
+
 // ─── Вариант A: trust_ren (приняли тепло) ───
 
 const s3a_p1 = applyLayout('8', 'act1_scene3a_p1', [
@@ -90,7 +125,7 @@ const s3a_end: Page = {
 
 // ─── Вариант B: test_ren (испытание) ───
 
-const s3b_fight = applyLayout('8', 'act1_scene3b_fight', [
+const s3b_fight = applyLayout('1', 'act1_scene3b_fight', [
   {
     src: '/comics/act_1/panels/s3_b_fight_1.png',
     type: 'image' as const,
@@ -119,6 +154,16 @@ const s3b_fight = applyLayout('8', 'act1_scene3b_fight', [
         speakerId: 'narrator',
         text: 'Мечи скрестились. В зале стало тихо. Рэн держался — но в глазах Рюсэя мелькнуло что-то, похожее на узнавание.',
       },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_b_fight_2b.png',
+    type: 'image' as const,
+    alt: 'Рэн едва уворачивается, Рюсэй замер — на лице тень прошлого',
+    dialogue: [
+      { speakerId: 'ryusei', text: '…Ты где этому научился?' },
+      { speakerId: 'ren', text: 'На улице, господин. А вы?' },
+      { speakerId: 'narrator', text: 'Рюсэй не ответил. Он просто смотрел на мальчишку. И впервые за долгие годы — не знал, что сказать.' },
     ],
   },
 ]);
@@ -199,6 +244,40 @@ const s3b_end: Page = {
   ],
 };
 
+// ─── Страница 1.5: Кэнта подходит к Юки (вариант C) ───
+const s3c_kenta_yuki = applyLayout('8', 'act1_scene3c_kenta_yuki', [
+  {
+    src: '/comics/act_1/panels/s3_c_kenta_1.png',
+    type: 'image' as const,
+    alt: 'Кэнта с чашками чая замечает Юки одну в углу зала',
+    focus: { x: 50, y: 30 },
+    dialogue: [
+      { speakerId: 'narrator', text: 'Кэнта нёс чай. Увидел Юки — и остановился. Она сидела одна на краю сцены, обхватив колени. Сямисэн молчал рядом.' },
+      { speakerId: 'kenta', text: '…Эй. Ты как?' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_c_kenta_2.png',
+    type: 'image' as const,
+    alt: 'Кэнта протягивает Юки чашку, она поднимает взгляд',
+    focus: { x: 50, y: 40 },
+    dialogue: [
+      { speakerId: 'narrator', text: 'Он протянул ей чашку. Не сказал ни слова. Просто держал — и ждал.' },
+      { speakerId: 'yuki', text: '…Зачем?' },
+      { speakerId: 'kenta', text: 'Чай горячий. Согреешься.' },
+    ],
+  },
+  {
+    src: '/comics/act_1/panels/s3_c_kenta_3.png',
+    type: 'image' as const,
+    alt: 'Рэн наблюдает за ними издалека, лицо непроницаемое',
+    focus: { x: 50, y: 50 },
+    dialogue: [
+      { speakerId: 'narrator', text: 'Рэн смотрел из-за колонны. Лицо — ни страха, ни злости. Только тишина. Но пальцы сжимали посох так, что побелели костяшки.' },
+    ],
+  },
+])
+
 // ─── Вариант C: reject_ren (отказали) ───
 
 const s3c_p1 = applyLayout('8', 'act1_scene3c_p1', [
@@ -269,10 +348,10 @@ const s3c_end: Page = {
       id: 'p_end',
       src: '/comics/act_1/panels/s3_c_end.png',
       type: 'image' as const,
-      alt: 'Тадаси уходит; Рэн и Юки остаются в зале',
+      alt: 'Кэнта зовёт Рэна и Юки к ужину; Рюсэй и Горо уходят на заднем плане',
       dialogue: [
-        { speakerId: 'tadashi', text: 'Оставайтесь. Но на сцену — ни шагу. Смотрите и учитесь.' },
-      ],
+              { speakerId: 'kenta', text: 'Тадаси-сан согласился — остаётесь. Пошли, я покажу где ужин. Там мисо и рис — небогато, но горячее.' },
+            ],
     },
   ],
 };
@@ -313,7 +392,7 @@ export interface Scene3Variant {
 export const scene3Variants: Record<string, Scene3Variant> = {
   trust: {
     id: 'scene3_trust',
-    pages: [s3a_p1, s3a_p2, s3a_end, dinnerPage],
+    pages: [s3a_p1, s3a_before_stage, s3a_p2, s3a_end, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [
@@ -337,7 +416,7 @@ export const scene3Variants: Record<string, Scene3Variant> = {
   },
   reject: {
     id: 'scene3_reject',
-    pages: [s3c_p1, s3c_p2, s3c_end, dinnerPage],
+    pages: [s3c_p1, s3c_p2, s3c_kenta_yuki, s3c_end, dinnerPage],
     choiceAfter: {
       prompt: 'Что ты думаешь?',
       choices: [

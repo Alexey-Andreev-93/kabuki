@@ -55,7 +55,8 @@ const finale_p2 = applyLayout('8', 'act1_finale_p2', [
     alt: 'Рэн и Юки наблюдают из тени',
     dialogue: [
       { speakerId: 'ren', text: 'Смотри. Они улыбаются. Те же лица. Те же жесты. Только мечи спрятаны.' },
-      { speakerId: 'yuki', text: 'Они не изменились, Рэн. Они просто сменили сцену.' },
+      { speakerId: 'yuki', text: 'А если они и правда изменились?' },
+      { speakerId: 'ren', text: '…' },
     ],
   },
 ])
