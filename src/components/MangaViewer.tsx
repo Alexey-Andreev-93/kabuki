@@ -22,13 +22,15 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
 
   const animated = !!sceneClass
   const [sliding, setSliding] = useState<Set<string>>(new Set())
+  const [cleaned, setCleaned] = useState(false)
   const prevPageId = useRef(page.id)
 
-  // Reset sliding on page change
+  // Reset states on page change
   useEffect(() => {
     if (page.id !== prevPageId.current) {
       prevPageId.current = page.id
       setSliding(new Set())
+      setCleaned(false)
     }
   }, [page.id])
 
@@ -57,6 +59,8 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
       advancePanel()
       return
     }
+    // На последней панели: первый клик — убрать диалоги, второй — перелистнуть
+    if (!cleaned) { setCleaned(true); return }
     onPageComplete()
   }
 
@@ -72,7 +76,7 @@ export default function MangaViewer({ page, onPageComplete, sceneClass }: Props)
         const order = sortedAreas.findIndex(a => a.panelId === panel.id)
         const isRevealed = order <= currentPanelOrder
         const isActive = panel.id === currentPanelId
-        const dialogue = isActive && currentDialogue ? currentDialogue : undefined
+        const dialogue = isActive && currentDialogue && !cleaned ? currentDialogue : undefined
         const isNarrator = dialogue?.speakerId === 'narrator'
         const focus = panel.focus || { x: 50, y: 50 }
 

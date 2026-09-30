@@ -34,14 +34,28 @@ html, body, #root {
   padding: 32px;
 }
 
-/* Manga Page */
+/* Page wrap — чёрный фон, центрирование страницы */
+.page-wrap {
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+/* Manga Page — белая страница как в реальной манге */
 .manga-page {
   display: grid;
   gap: 15px;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #e8e0d8;
+  padding: 40px;
+  width: calc(100vw - 40px);
+  height: calc(100vh - 100px);
+  max-width: 1700px;
+  max-height: 1000px;
+  background: #f5f0e8;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
 }
 
 .panel {
@@ -170,13 +184,6 @@ html, body, #root {
 }
 
 /* Page fade */
-.page-wrap {
-  width: 100vw;
-  height: 100vh;
-  background: #0a0a0a;
-  transition: opacity 0.3s ease;
-}
-
 .page-wrap.page-hidden {
   opacity: 0;
 }
